@@ -51,7 +51,8 @@ class LiveVisionProvider:
         if controlled is not None:
             self.last_controlled = controlled
         ball_distance = distance(controlled, ball.position) if controlled and ball.position else 1.0
-        opponents = self._find_opponents(frame)
+        # 当前不启用通用“非蓝色区域=对手”启发式；它会把草地纹理和界面元素误报成大量对手。
+        opponents: list[PlayerObservation] = []
         opponent_ball_distance = min((distance(player.position, ball.position) for player in opponents), default=1.0) if ball.position else 1.0
         nearest_opponent = min(opponents, key=lambda player: distance(player.position, controlled), default=None) if controlled else None
         nearest_opponent_distance = distance(nearest_opponent.position, controlled) if nearest_opponent and controlled else 1.0

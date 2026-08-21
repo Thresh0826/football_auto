@@ -12,15 +12,17 @@ class ActionPlanner:
     def __init__(self, backend: InputBackend, calibration: dict[str, Any]) -> None:
         self.backend = backend
         self.calibration = calibration
+        region = calibration.get("screen_region", {})
+        self.screen_offset = (int(region.get("left", 0)), int(region.get("top", 0))) if isinstance(region, dict) else (0, 0)
         self.joystick_down = False
         self.held_button: str | None = None
 
     def _point(self, name: str) -> tuple[int, int] | None:
         value = self.calibration.get(name)
         if isinstance(value, dict) and "x" in value and "y" in value:
-            return int(value["x"]), int(value["y"])
+            return int(value["x"]) + self.screen_offset[0], int(value["y"]) + self.screen_offset[1]
         if isinstance(value, (list, tuple)) and len(value) == 2:
-            return int(value[0]), int(value[1])
+            return int(value[0]) + self.screen_offset[0], int(value[1]) + self.screen_offset[1]
         return None
 
     def _joystick_target(self, direction: tuple[float, float], intensity: float) -> tuple[int, int] | None:

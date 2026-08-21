@@ -46,7 +46,7 @@ def run_self_test() -> int:
 def run_live(args: argparse.Namespace) -> int:
     logger = get_logger()
     config = load_config(args.config, args.calibration)
-    backend = DryRunInputBackend() if args.dry_run else Win32InputBackend()
+    backend = DryRunInputBackend() if args.dry_run else Win32InputBackend(config.capture.scrcpy_title)
     planner = ActionPlanner(backend, config.calibration)
     brain = Brain(config.decision)
     overlay = Overlay(config.debug)

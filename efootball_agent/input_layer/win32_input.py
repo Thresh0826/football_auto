@@ -9,13 +9,23 @@ from .base import InputBackend
 class Win32InputBackend(InputBackend):
     """普通 Windows 鼠标输入；仅用于 scrcpy 镜像窗口中的虚拟按键。"""
 
-    def __init__(self) -> None:
+    def __init__(self, window_title: str = "") -> None:
         if sys.platform != "win32":
             raise RuntimeError("Win32InputBackend 只能在 Windows 使用")
         self.user32 = ctypes.windll.user32
+        self.window_title = window_title
         self._down: set[str] = set()
 
+    def _focus_target(self) -> None:
+        if not self.window_title:
+            return
+        hwnd = self.user32.FindWindowW(None, self.window_title)
+        if hwnd:
+            self.user32.ShowWindow(hwnd, 9)
+            self.user32.SetForegroundWindow(hwnd)
+
     def move_to(self, x: int, y: int) -> None:
+        self._focus_target()
         self.user32.SetCursorPos(int(x), int(y))
 
     def button_down(self, button: str = "left") -> None:
@@ -32,4 +42,3 @@ class Win32InputBackend(InputBackend):
         for button in tuple(self._down):
             self.button_up(button)
         self._down.clear()
-

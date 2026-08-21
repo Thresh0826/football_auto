@@ -5,4 +5,4 @@ if not exist "%SCRCPY%" (
     pause
     exit /b 1
 )
-"%SCRCPY%" --max-size=1600 --max-fps=60 --stay-awake
+"%SCRCPY%" --window-title="eFootball scrcpy" --max-size=1600 --max-fps=60 --stay-awake
