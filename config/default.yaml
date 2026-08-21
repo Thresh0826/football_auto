@@ -1,0 +1,38 @@
+capture:
+  fps: 30
+  region: null
+  scrcpy_title: ""
+
+vision:
+  blue_hsv_low: [90, 55, 35]
+  blue_hsv_high: [140, 255, 255]
+  min_player_area: 18
+  confidence_threshold: 0.42
+
+tracking:
+  lost_timeout: 0.35
+
+decision:
+  tick_rate: 10
+  danger_threshold: 0.62
+  tackle_distance: 0.11
+  shoot_threshold: 0.70
+  pass_threshold: 0.56
+  dribble_threshold: 0.48
+  state_confirm_frames: 3
+  state_cooldown: 0.25
+
+action:
+  pass_duration: 0.08
+  shoot_duration: 0.10
+  tackle_cooldown: 0.65
+  pass_cooldown: 0.35
+  shoot_cooldown: 0.55
+  dribble_change_cooldown: 0.55
+
+debug:
+  overlay: true
+  # 调试窗口默认只显示状态文字，避免被桌面捕获再次叠加。
+  show_frame: false
+  recording: false
+  recording_dir: recordings

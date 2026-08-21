@@ -1,0 +1,19 @@
+.venv/
+.venv-old-*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+logs/
+recordings/
+config/calibration.yaml
+config/templates/
+
+# Local IDE and OS files
+.vscode/
+.idea/
+*.code-workspace
+Thumbs.db
+Desktop.ini
+.git2/

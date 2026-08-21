@@ -1,0 +1,26 @@
+from enum import Enum
+
+
+class Possession(str, Enum):
+    OUR_TEAM = "OUR_TEAM"
+    OPPONENT = "OPPONENT"
+    LOOSE = "LOOSE"
+    UNKNOWN = "UNKNOWN"
+
+
+class Phase(str, Enum):
+    ATTACK = "ATTACK"
+    DEFENSE = "DEFENSE"
+    TRANSITION = "TRANSITION"
+
+
+class AgentState(str, Enum):
+    IDLE = "IDLE"
+    ATTACK_OFF_BALL = "ATTACK_OFF_BALL"
+    RECEIVING = "RECEIVING"
+    POSSESSION = "POSSESSION"
+    DEFEND_NORMAL = "DEFEND_NORMAL"
+    DEFEND_DANGER = "DEFEND_DANGER"
+    TRANSITION_ATTACK = "TRANSITION_ATTACK"
+    TRANSITION_DEFENSE = "TRANSITION_DEFENSE"
+
